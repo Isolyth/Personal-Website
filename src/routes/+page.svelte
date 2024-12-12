@@ -36,7 +36,7 @@
 </style>
 
 <div class="page-content">
-    <p>Welcome to my personal website. Here you can find information about me and how to get in touch.</p>
+    <p>Placehloder</p>
     
     <div class="content-box">
         <h2>Theme Demonstration</h2>
