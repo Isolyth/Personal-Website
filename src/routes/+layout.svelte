@@ -1,8 +1,12 @@
 <script>
   import '$lib/styles/theme.css';
+  import GameOfLife from '$lib/components/GameOfLife.svelte';
 </script>
 
 <header>
+    <div class="game-container">
+        <GameOfLife />
+    </div>
     <h1>My Personal Website</h1>
 </header>
 <nav>
@@ -42,6 +46,23 @@
     text-align: center;
     padding: 1rem 0;
     margin: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .game-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  h1 {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 1rem 0;
   }
 
   nav {
