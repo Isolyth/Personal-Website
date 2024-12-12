@@ -1,0 +1,21 @@
+{
+  "colors": {
+    "background": {
+      "base": "#11111b",
+      "surface": "#181825",
+      "overlay": "#1e1e2e"
+    },
+    "text": "#cdd6f4",
+    "link": {
+      "default": "#cba6f7",
+      "hover": "#cba6f7"
+    },
+    "accent": "#cba6f7"
+  },
+  "fonts": {
+    "primary": {
+      "family": "Berkeley Mono",
+      "weights": [400]
+    }
+  }
+}

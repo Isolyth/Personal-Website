@@ -1,0 +1,40 @@
+@import './fonts.css';
+
+/* Theme variables based on Catppuccin Mocha */
+:root {
+  /* Background colors */
+  --background-base: #11111b;
+  --background-surface: #181825;
+  --background-overlay: #1e1e2e;
+  
+  /* Text colors */
+  --text-color: #cdd6f4;
+  
+  /* Link and accent colors */
+  --link-color: #cba6f7;
+  --link-hover-color: #cba6f7;
+  --accent-color: #cba6f7;
+}
+
+/* Apply base styles to body */
+body {
+  background-color: var(--background-base);
+  color: var(--text-color);
+  font-family: var(--font-primary);
+}
+
+/* Global link styles */
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--link-hover-color);
+}
+
+/* Ensure headings use the primary font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-primary);
+}
