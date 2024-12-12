@@ -1,13 +1,26 @@
 <script>
   import '$lib/styles/theme.css';
   import GameOfLife from '$lib/components/GameOfLife.svelte';
+  import { page } from '$app/stores';
+
+  // Function to get the page title from the current path
+  $: pageTitle = (() => {
+    const path = $page.url.pathname;
+    if (path === '/') return 'Home';
+    
+    const segments = path.split('/');
+    const lastSegment = segments[segments.length - 1] || segments[segments.length - 2] || '';
+    if (!lastSegment) return 'Home';
+    
+    return lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
+  })();
 </script>
 
 <header>
     <div class="game-container">
         <GameOfLife />
     </div>
-    <h1>My Personal Website</h1>
+    <h1>{pageTitle}</h1>
 </header>
 <nav>
     <a href="/">Home</a>
