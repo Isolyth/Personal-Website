@@ -13,6 +13,12 @@
   let width: number;
   let gameWidth: number;
   let gameHeight: number;
+  let resizeTimeout: ReturnType<typeof setTimeout>;
+  let resetInterval: ReturnType<typeof setInterval>;
+  let lastFrameTime = 0;
+  const FRAME_RATE = 30; // Increased to 30 FPS
+  const FRAME_DELAY = 1000 / FRAME_RATE;
+  const RESET_INTERVAL = 15000; // Reset every 15 seconds
 
   // Create initial random state
   function createInitialState(): boolean[][] {
@@ -93,14 +99,22 @@
     ctx.restore();
   }
 
-  // Animation loop
-  function animate() {
+  // Animation loop with controlled frame rate
+  function animate(currentTime: number) {
+    animationFrame = requestAnimationFrame(animate);
+
+    // Control frame rate
+    if (currentTime - lastFrameTime < FRAME_DELAY) {
+      return;
+    }
+
     positions = step(positions);
     draw();
-    animationFrame = requestAnimationFrame(animate);
+    lastFrameTime = currentTime;
   }
 
-  function handleResize() {
+  // Actual resize handler
+  function performResize() {
     if (!canvas || !browser) return;
     
     // Get the parent element's width
@@ -124,6 +138,21 @@
     positions = createInitialState();
   }
 
+  // Debounced resize handler
+  function handleResize() {
+    if (!browser) return;
+    
+    // Clear the previous timeout
+    if (resizeTimeout) {
+      clearTimeout(resizeTimeout);
+    }
+    
+    // Set a new timeout
+    resizeTimeout = setTimeout(() => {
+      performResize();
+    }, 1000); // Only update once per second
+  }
+
   onMount(() => {
     if (!browser) return;
 
@@ -131,18 +160,30 @@
       ctx = canvas.getContext('2d');
       
       // Initial setup
-      handleResize();
+      performResize();
       
       // Add resize listener
       window.addEventListener('resize', handleResize);
       
-      animate();
+      // Start animation with timestamp
+      animationFrame = requestAnimationFrame(animate);
+
+      // Set up periodic reset
+      resetInterval = setInterval(() => {
+        positions = createInitialState();
+      }, RESET_INTERVAL);
     }
 
     return () => {
       if (browser) {
         if (animationFrame) {
           cancelAnimationFrame(animationFrame);
+        }
+        if (resizeTimeout) {
+          clearTimeout(resizeTimeout);
+        }
+        if (resetInterval) {
+          clearInterval(resetInterval);
         }
         window.removeEventListener('resize', handleResize);
       }
