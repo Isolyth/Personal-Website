@@ -36,7 +36,7 @@
 </style>
 
 <div class="page-content">
-    <p>Placehloder</p>
+    <p>Placehloder!!</p>
     
     <div class="content-box">
         <h2>Theme Demonstration</h2>
