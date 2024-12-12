@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Mail } from 'lucide-svelte'; // Import the Mail icon
+  import { Mail, Github } from 'lucide-svelte'; // Import both Mail and Github icons
   let email: string = '';
   let isLoading: boolean = false;
   let error: string | null = null;
@@ -47,7 +47,20 @@
 
     <div class="contact-box">
       <div class="icon">
-        <Mail size={48} color="var(--text-color)" /> <!-- Replace img with Mail component -->
+        <Github size={48} color="var(--text-color)" />
+      </div>
+      <div class="content">
+        <h2>GitHub</h2>
+        <p>Check out my projects</p>
+        <a href="https://github.com/Isolyth" target="_blank" rel="noopener noreferrer">
+          @Isolyth
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-box">
+      <div class="icon">
+        <Mail size={48} color="var(--text-color)" />
       </div>
       <div class="content">
         <h2>Email</h2>
@@ -104,9 +117,9 @@
     width: 48px;
     height: 48px;
     margin-right: 1.5rem;
-    display: flex; /* Added to center the Lucide icon */
-    align-items: center; /* Added to center the Lucide icon */
-    justify-content: center; /* Added to center the Lucide icon */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .icon img {
